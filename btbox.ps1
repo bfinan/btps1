@@ -2,6 +2,7 @@
 Enable-RemoteDesktop
 Set-WindowsExplorerOptions -enableshowProtectedOSFiles -enableshowFileExtensions
 
+choco install -y chocolatey
 choco install -y boxstarter
 choco install -y urlrewrite
 choco install -y nodejs-lts
@@ -87,7 +88,9 @@ Enable-WindowsOptionalFeature -Online -FeatureName IIS-FTPExtensibility -All 2>>
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation45 -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
-Clear-Host
+
+cat $env:LocalAppData\Boxstarter\Boxstarter.log > log.txt
+
 
 #$wshell = New-Object -ComObject Wscript.Shell
 #$wshell.Popup("Operation Completed.",0,"Done",0x1)
