@@ -87,6 +87,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName IIS-FTPExtensibility -All 2>>
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation45 -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 Clear-Host
 
 #$wshell = New-Object -ComObject Wscript.Shell
