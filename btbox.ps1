@@ -2,11 +2,14 @@
 Enable-RemoteDesktop
 Set-WindowsExplorerOptions -enableshowProtectedOSFiles -enableshowFileExtensions
 
+choco install -y chocolatey
 choco install -y boxstarter
 choco install -y urlrewrite
 choco install -y nodejs-lts
+choco install -y pester
+choco install -y redis-64
 
-# Install .NET Framework 4.7.2
+# Install .NET Framework 4.7.2 
 choco install -y netfx-4.7.2-devpack
 
 # https://chocolatey.org/packages/VisualStudio2017Professional
@@ -22,7 +25,7 @@ choco install -y charles4
 #choco install -y linqpad5.anycpu.portable --version 5.28.03-beta --pre
 
 #BT has a license for BC3, so we pin it to keep it from updating to 4.
-choco install -y beyondcompare --version 3.3.13.18981
+choco install  beyondcompare --version 3.3.13.18981 -y
 choco pin add -n=beyondcompare
 
 #Additional policies
@@ -87,8 +90,10 @@ Enable-WindowsOptionalFeature -Online -FeatureName IIS-FTPExtensibility -All 2>>
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation45 -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-Clear-Host
 
-#$wshell = New-Object -ComObject Wscript.Shell
-#$wshell.Popup("Operation Completed.",0,"Done",0x1)
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+wsl.exe sudo apt-get install redis-server
+
+
+Write-Host 'Script complete. Use "cat $env:LocalAppData\Boxstarter\Boxstarter.log > log.txt" to view any potential errors.'
