@@ -94,5 +94,6 @@ Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All 2>> C:\IISS
 cat $env:LocalAppData\Boxstarter\Boxstarter.log > log.txt
 
 
-#$wshell = New-Object -ComObject Wscript.Shell
-#$wshell.Popup("Operation Completed.",0,"Done",0x1)
+wsl.exe sudo apt-get install redis-server -y
+wsl.exe sudo sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
+wsl.exe sudo service redis-server restart
