@@ -91,9 +91,8 @@ Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation -All 2>> 
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation45 -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-
-wsl.exe sudo apt-get install redis-server
+cat $env:LocalAppData\Boxstarter\Boxstarter.log > log.txt
 
 
-Write-Host 'Script complete. Use "cat $env:LocalAppData\Boxstarter\Boxstarter.log > log.txt" to view any potential errors.'
+#$wshell = New-Object -ComObject Wscript.Shell
+#$wshell.Popup("Operation Completed.",0,"Done",0x1)
