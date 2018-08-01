@@ -1,6 +1,7 @@
 # Configuration options
 Enable-RemoteDesktop
 Set-WindowsExplorerOptions -enableshowProtectedOSFiles -enableshowFileExtensions
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
 choco install -y chocolatey
 choco install -y boxstarter
@@ -14,8 +15,7 @@ choco install -y netfx-4.7.2-devpack
 
 # https://chocolatey.org/packages/VisualStudio2017Professional
 # choco install visualstudio2017professional --product-key XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
-choco install visualstudio2017professional
-
+choco install -y visualstudio2017professional
 choco install -y notepadplusplus
 choco install -y postman
 choco install -y charles4
@@ -91,9 +91,20 @@ Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation -All 2>> 
 Enable-WindowsOptionalFeature -Online -FeatureName WCF-HTTP-Activation45 -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient -All 2>> C:\IISScriptSetupLogs\EnableWindowsOptionalFeatureErrors.txt
 
-cat $env:LocalAppData\Boxstarter\Boxstarter.log > log.txt
 
+# Install Redis
+#wsl.exe sudo apt-get install redis-server -y
+#wsl.exe sudo sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
+#wsl.exe sudo service redis-server restart
 
-wsl.exe sudo apt-get install redis-server -y
-wsl.exe sudo sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
-wsl.exe sudo service redis-server restart
+# Install DotNetMQ
+#cd ~/Downloads
+
+# Get our hosted version of DNMQ, because it's behind a login
+# DNMQ is GPLv3, so there aren't licensing issues.
+#wsl.exe wget https://github.com/bfinan/btps1/raw/master/DotNetMQ_Binaries.zip
+#wsl.exe sudo apt-get install unzip
+#wsl.exe unzip DotNetMQ_Binaries.zip
+#mv DotNetMQ_Binaries 'C:\Program Files\DotNetMQ'
+
+Write-Host 'Script complete. Use "cat $env:LocalAppData\Boxstarter\Boxstarter.log > log.txt" to view your output'
